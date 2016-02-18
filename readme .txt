@@ -11,4 +11,4 @@
  
  This Plugin is used as a flat file slider - users can Add/Edit/Delete slides and change their disply position 
  
- To fetch the slider at from end - use shortcode <?php echo do_shortcode('[flat-slider]');?>
+ To fetch the slider at front end - use shortcode <?php echo do_shortcode('[flat-slider]');?>
