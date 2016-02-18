@@ -1,0 +1,112 @@
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../fonts/glyphicons-halflings-regular.eot');
+  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+}
+
+/*==========  Mobile First Method  ==========*/
+
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 320px) {
+  .carousel-caption {
+    top:2%;
+  }
+  h1.slider-title{
+    font-size:16px;
+    line-height:20px;
+    font-weight:normal;
+    font-family:'Open Sans', sans-serif;
+    color:#ffffff;
+  }
+
+  h2.slider-title-sm{
+    font-size:12px;
+    line-height:20px;
+    font-weight:normal;
+    font-family:'Open Sans', sans-serif;
+    color: #ffffff;
+  }
+}
+
+/* Extra Small Devices, Phones */
+@media  screen and (min-width : 480px) {
+
+  .carousel-caption {
+    top:20%;
+  }
+  h1.slider-title{
+    font-size:18px;
+    line-height: 36px;
+    font-weight:normal;
+    font-family:'Open Sans', sans-serif;
+    color: #ffffff;
+  }
+
+  h2.slider-title-sm{
+    font-size:14px;
+    line-height: 36px;
+    font-weight:normal;
+    font-family:'Open Sans', sans-serif;
+    color: #ffffff;
+  }
+  .carousel-indicators {
+    bottom:30px !important;
+  }
+
+}
+
+/* Small Devices, Tablets */
+@media screen and (min-width : 768px) {
+
+  .carousel-caption {
+    top:20%;
+  }
+  h1.slider-title{
+    font-size:28px;
+    line-height: 36px;
+    font-weight:normal;
+    font-family:'Open Sans', sans-serif;
+    color: #ffffff;
+  }
+
+  h2.slider-title-sm{
+    font-size:18px;
+    line-height: 36px;
+    font-weight:normal;
+    font-family:'Open Sans', sans-serif;
+    color: #ffffff;
+  }
+
+  .carousel-indicators {
+    bottom: 80px !important;
+  }
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+  .carousel-caption {
+    top:35%;
+  }
+
+  h1.slider-title{
+    font-size:36px;
+    line-height:56px;
+    font-weight:600;
+    font-family:'Open Sans', sans-serif;
+    color: #ffffff;
+  }
+
+  h2.slider-title-sm{
+    font-size:20px;
+    line-height: 36px;
+    font-weight:600;
+    font-family:'Open Sans', sans-serif;
+    color: #ffffff;
+  }
+  .carousel-indicators {
+    bottom: 80px !important;
+  }
+
+
+}
