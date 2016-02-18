@@ -76,8 +76,6 @@ function slider_upload_dir($dir) {
 
 function validate_setting($plugin_options) {
 
-    //echo "tehre";exit;
-
     $keys = array_keys($_FILES);
     $i = 0;
     foreach ($_FILES as $image) {
@@ -87,12 +85,9 @@ function validate_setting($plugin_options) {
             // save the file, and store an array, containing its location in $file     
             // Register our path override.
             add_filter('upload_dir', 'slider_upload_dir');
-
             $file = wp_handle_upload($image, $override);
             remove_filter('upload_dir', 'slider_upload_dir');
             $plugin_options[$keys[$i]] = $file['url'];
-            //echo $file['url'];
-
             $name = basename($file['url']); // to get file name
             $pos = $_POST['select_order'];
             $slider = getSlides();
@@ -117,9 +112,8 @@ function validate_setting($plugin_options) {
 
 function EditSlides() {
     $slider = getSlides();
-
     replaceLine($slider, $_REQUEST['editactionid']);
-    //exit;
+
 }
 
 function replaceLine($sliderArr, $replaceId) {
@@ -135,19 +129,15 @@ function replaceLine($sliderArr, $replaceId) {
                     // save the file, and store an array, containing its location in $file     
                     // Register our path override.
                     add_filter('upload_dir', 'slider_upload_dir');
-
                     $file = wp_handle_upload($image, $override);
                     remove_filter('upload_dir', 'slider_upload_dir');
                     $plugin_options[$keys[$i]] = $file['url'];
-                    //echo $file['url'];
-
                     $name = basename($file['url']); // to get file name
                     $pos = $_POST['select_order'];
                     $slider = getSlides();
                     $total_slides = count($slider);
                     $slidenum = $singlearr['slide_id'];
                     $upload_dir = wp_upload_dir();
-                    //echo $upload_dir['basedir'] . '/slider'.$singlearr['image_name'];
                     unlink($upload_dir['basedir'] . '/slider/' . $singlearr['image_name']);
                     $oldline = $slidenum . "#" . $singlearr['image_name'] . "#" . $singlearr['slide_position'];
                     $newline = $slidenum . "#" . $name . "#" . $pos . "\n";
