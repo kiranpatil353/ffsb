@@ -53,4 +53,4 @@ currently no upgrades sections
 == A brief Markdown Example ==
 
 
-`<?php code(); // goes in backticks ?>`
+<?php echo do_shortcode('[flat-slider]');?>
