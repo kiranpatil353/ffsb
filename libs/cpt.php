@@ -1,6 +1,5 @@
 <?php
-   wp_enqueue_script('slider-validation-js', plugins_url('/../assets/js/validation.js', __FILE__));
-   
+  wp_enqueue_script('slider-validation-js', plugins_url('/../assets/js/validation.js', __FILE__));
 function getSlides() {
     $myfile = fopen(PLUGIN_FOLDER_PATH . "libs/slider.txt", "r") or die("Unable to open file!");
     // Output one line until end-of-file
@@ -12,6 +11,7 @@ function getSlides() {
         $key["slide_id"] = $myslide[0];
         $key["image_name"] = $myslide[1];
         $key["slide_position"] = $myslide[2];
+		$key["slide_text"] = $myslide[3];
         $slider[$i++] = $key;
     }
     fclose($myfile);
@@ -27,7 +27,7 @@ if (isset($_REQUEST['deleteval']) && !empty($_REQUEST['deleteval'])) {
             $slidenum = $singlearr['slide_id'];
             $upload_dir = wp_upload_dir();
             unlink($upload_dir['basedir'] . '/slider/' . $singlearr['image_name']);
-            $oldline = $slidenum . "#" . $singlearr['image_name'] . "#" . $singlearr['slide_position'];
+            $oldline = $slidenum . "#" . $singlearr['image_name'] . "#" . $singlearr['slide_position']. "#" . $singlearr['slide_text'];
             $contents = file_get_contents($myfile);
             $contents = str_replace($oldline, '', $contents);
             file_put_contents($myfile, $contents);
@@ -61,6 +61,7 @@ function my_plugin_options() {
             $key["slide_id"] = $myslide[0];
             $key["image_name"] = $myslide[1];
             $key["slide_position"] = $myslide[2];
+			$key["slide_text"] = $myslide[3];
             $slider[$i++] = $key;
         }
     }

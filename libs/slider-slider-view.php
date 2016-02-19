@@ -19,6 +19,7 @@ function slider_slider_view() {
             $key["slide_id"] = $myslide[0];
             $key["image_name"] = $myslide[1];
             $key["slide_position"] = $myslide[2];
+			$key["slide_text"] = $myslide[3];
             $slider[$i++] = $key;
         }
     }
@@ -53,6 +54,12 @@ function slider_slider_view() {
         ?>
                 <div class="item <?php echo $i == 0 ? 'active' : ''; ?>">
                     <img src="<?php echo $upload_dir['baseurl'] . '/slider/' . $slider[$i]['image_name']; ?>" />
+					
+					 	<div class="carousel-caption">';
+								<?php if(isset($slider[$i]['slide_text'])){ ?>
+									<h2 class="slider-title-sm"><?php echo $slider[$i]['slide_text']; ?></h2>
+								<?php }?>
+						</div>
                 </div> <!--  items -->
         <?php
     }

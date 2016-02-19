@@ -1,7 +1,11 @@
 <?php
-function AddSlide($filename, $position, $file_id) {
+	$current_text = '';
+	$current_pos = 1;
+	$current_file ='';
+	
+function AddSlide($filename, $position, $file_id ,$text) {
     $myfile = PLUGIN_FOLDER_PATH . "libs/slider.txt";
-    $savestring = $file_id . "#" . $filename . "#" . $position . "\n";
+    $savestring = $file_id . "#" . $filename . "#" . $position ."#".$text."\n";
     file_put_contents($myfile, $savestring, FILE_APPEND | LOCK_EX);
     exit(wp_redirect(admin_url('admin.php?page=my-top-level-handle')));
 }
@@ -17,8 +21,12 @@ add_action('admin_menu', 'slider_add_submenu_page');
 function slider_slider_add_register_settings() {
      if (isset($_REQUEST['editaction'])) {
         register_setting('slider_slider_add_settings_group', 'select_file', 'EditSlides');
+		register_setting('slider_slider_add_settings_group', 'add_text', 'EditSlides');
+		
+		
     } else {
         register_setting('slider_slider_add_settings_group', 'select_file', 'validate_setting');
+		register_setting('slider_slider_add_settings_group', 'add_text', 'validate_setting');
     }
     register_setting('slider_slider_add_settings_group', 'select_order');
 }
@@ -26,6 +34,22 @@ function slider_slider_add_register_settings() {
 add_action('admin_init', 'slider_slider_add_register_settings');
 
 function slider_slider_add_options_function() {
+	
+	
+		if(isset($_REQUEST['id'])){
+		$slider =  getSlides();
+		 foreach ($slider as $singlearr) {
+			
+		 if ($singlearr['slide_id'] == $_REQUEST['id']) {
+			$current_id = $singlearr['slide_id'];
+			$current_file = $singlearr['image_name'];
+			$current_pos = $singlearr['slide_position'];
+			$current_text = $singlearr['slide_text'];
+		 }
+		}
+	}
+		
+		$upload_dir = wp_upload_dir();
     ?>
     <div class="wrap">
         <h2>Flat Slider - Add New Slide</h2>
@@ -36,7 +60,17 @@ function slider_slider_add_options_function() {
                 <tr valign="top">
                     <th scope="row">Select File:</th>
                     <td><input type="file" name="select_file" class="" value="<?php echo esc_attr(get_option('select_file')); ?>" /></td>
-                </tr>						
+						<?php if(isset($current_id)){ ?>
+							<td>
+								<img src="<?php echo $upload_dir['baseurl'];?>/slider/<?php echo $current_file;?>" alt="" width="150px" height="150px"/>
+								</td>
+						<?php 	} ?>
+					
+                </tr>	
+				<tr valign="top">
+                    <th scope="row">Add Text:</th>
+                    <td><input type="text" name="add_text" class="" value="<?php echo $current_text; ?>" /></td>
+                </tr>
                 <tr valign="top">
                     <th scope="row"> Select Position:</th>
                     <td>
@@ -46,7 +80,7 @@ function slider_slider_add_options_function() {
     ?>
                         <select name="select_order" class="form-control">
                         <?php for ($k = 1; $k <= $total_slides; $k++) { ?>
-                                <option <?php if (get_option('select_order') == $k) { ?> selected="selected"<?php } ?> value="<?php echo $k; ?>"><?php echo $k; ?></option>
+                                <option <?php if ( $current_pos == $k ) { ?> selected="selected"<?php } ?> value="<?php echo $k; ?>"><?php echo $k; ?></option>
                         <?php } ?>
                         </select>
                             <?php if (isset($_GET[id])) { ?>
@@ -75,7 +109,6 @@ function slider_upload_dir($dir) {
 }
 
 function validate_setting($plugin_options) {
-
     $keys = array_keys($_FILES);
     $i = 0;
     foreach ($_FILES as $image) {
@@ -85,16 +118,18 @@ function validate_setting($plugin_options) {
             // save the file, and store an array, containing its location in $file     
             // Register our path override.
             add_filter('upload_dir', 'slider_upload_dir');
+
             $file = wp_handle_upload($image, $override);
             remove_filter('upload_dir', 'slider_upload_dir');
             $plugin_options[$keys[$i]] = $file['url'];
             $name = basename($file['url']); // to get file name
             $pos = $_POST['select_order'];
+			$text = $_POST['add_text'];
             $slider = getSlides();
             $total_slides = count($slider);
             $slide_num = $total_slides;
             $total_slides = count($slider);
-            AddSlide($name, $pos, $slide_num);
+            AddSlide($name, $pos, $slide_num, $text);
         } else {       // Not an image.     
             $options = get_option('select_file');
 
@@ -113,7 +148,7 @@ function validate_setting($plugin_options) {
 function EditSlides() {
     $slider = getSlides();
     replaceLine($slider, $_REQUEST['editactionid']);
-
+    //exit;
 }
 
 function replaceLine($sliderArr, $replaceId) {
@@ -134,21 +169,23 @@ function replaceLine($sliderArr, $replaceId) {
                     $plugin_options[$keys[$i]] = $file['url'];
                     $name = basename($file['url']); // to get file name
                     $pos = $_POST['select_order'];
+					$text = $_POST['add_text'];
                     $slider = getSlides();
                     $total_slides = count($slider);
                     $slidenum = $singlearr['slide_id'];
                     $upload_dir = wp_upload_dir();
                     unlink($upload_dir['basedir'] . '/slider/' . $singlearr['image_name']);
-                    $oldline = $slidenum . "#" . $singlearr['image_name'] . "#" . $singlearr['slide_position'];
-                    $newline = $slidenum . "#" . $name . "#" . $pos . "\n";
+                    $oldline = $slidenum . "#" . $singlearr['image_name'] . "#" . $singlearr['slide_position']."#".$singlearr['slide_text'];
+                    $newline = $slidenum . "#" . $name . "#" . $pos ."#".$text."\n";
                     replaceNewLine($oldline, $newline);
                 } else {       // Not an image.     
                     $pos = $_POST['select_order'];
+					$text = $_POST['add_text'];
                     $slider = getSlides();
                     $total_slides = count($slider);
                     $slidenum = $singlearr['slide_id'];
-                    $oldline = $slidenum . "#" . $singlearr['image_name'] . "#" . $singlearr['slide_position'];
-                    $newline = $slidenum . "#" . $singlearr['image_name'] . "#" . $pos . "\n";
+                    $oldline = $slidenum . "#" . $singlearr['image_name'] . "#" . $singlearr['slide_position']."#".$singlearr['slide_text'];
+                    $newline = $slidenum . "#" . $singlearr['image_name'] . "#" . $pos ."#".$text."\n";
                     replaceNewLine($oldline, $newline);
                 }
             }   // Else, the user didn't upload a file.  
