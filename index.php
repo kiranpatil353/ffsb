@@ -10,7 +10,7 @@
 
 // Constant
 
-define('PLUGIN_FOLDER_PATH',plugin_dir_path(__FILE__));
+define('FFSB_SLIDER_FOLDER_PATH',plugin_dir_path(__FILE__));
 
  // Add files for admin and frontend
  include(plugin_dir_path( __FILE__ ).'/libs/cpt.php' );
@@ -18,7 +18,7 @@ define('PLUGIN_FOLDER_PATH',plugin_dir_path(__FILE__));
  include(plugin_dir_path( __FILE__ ).'/libs/slider-slider-view.php' );
  
  // Add scripts
- function slider_slider_enqueue_scripts() {
+ function ffsb_slider_enqueue_scripts() {
 //Plugin Main CSS File.
  	 wp_enqueue_style('slider-bootstrap-css', plugins_url('assets/css/bootstrap.min.css', __FILE__ ) );
      wp_enqueue_style( 'slider-slider-main', plugins_url('assets/css/slider-slider-main.css', __FILE__ ) );
@@ -27,9 +27,9 @@ define('PLUGIN_FOLDER_PATH',plugin_dir_path(__FILE__));
   }
 
  //This hook ensures our scripts and styles are only loaded in the admin.
- add_action( 'wp_enqueue_scripts', 'slider_slider_enqueue_scripts' );
+ add_action( 'wp_enqueue_scripts', 'ffsb_slider_enqueue_scripts' );
  
- function myplugin_activate() {
+ function ffsb_slider_activate() {
  
     $upload = wp_upload_dir();
     $upload_dir = $upload['basedir'];
@@ -39,9 +39,9 @@ define('PLUGIN_FOLDER_PATH',plugin_dir_path(__FILE__));
     }
 }
 
-register_activation_hook( __FILE__, 'myplugin_activate' );
+register_activation_hook( __FILE__, 'ffsb_slider_activate' );
 
-function myplugin_deactivate() {
+function ffsb_slider_deactivate() {
  
     $upload = wp_upload_dir();
     $upload_dir = $upload['basedir']."/slider";
@@ -62,5 +62,5 @@ function myplugin_deactivate() {
     rmdir($upload_dir);
 }
  
-register_deactivation_hook( __FILE__, 'myplugin_deactivate' );
+register_deactivation_hook( __FILE__, 'ffsb_slider_deactivate' );
 

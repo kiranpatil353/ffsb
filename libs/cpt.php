@@ -1,27 +1,27 @@
 <?php
-  wp_enqueue_script('slider-validation-js', plugins_url('/../assets/js/validation.js', __FILE__));
-function getSlides() {
-    $myfile = fopen(PLUGIN_FOLDER_PATH . "libs/slider.txt", "r") or die("Unable to open file!");
-    // Output one line until end-of-file
-    $slider = array();
-    $i = 0;
-    while (!feof($myfile)) {
-        $keys = array();
-        $myslide = explode("#", fgets($myfile));
-        $key["slide_id"] = $myslide[0];
-        $key["image_name"] = $myslide[1];
-        $key["slide_position"] = $myslide[2];
-		$key["slide_text"] = $myslide[3];
-        $slider[$i++] = $key;
-    }
-    fclose($myfile);
-    return $slider;
-}
+	wp_enqueue_script('slider-validation-js', plugins_url('/../assets/js/validation.js', __FILE__));
+	function ffsb_get_slides() {
+		$myfile = fopen(FFSB_SLIDER_FOLDER_PATH . "libs/slider.txt", "r") or die("Unable to open file!");
+		// Output one line until end-of-file
+		$slider = array();
+		$i = 0;
+		while (!feof($myfile)) {
+			$keys = array();
+			$myslide = explode("#", fgets($myfile));
+			$key["slide_id"] = $myslide[0];
+			$key["image_name"] = $myslide[1];
+			$key["slide_position"] = $myslide[2];
+			$key["slide_text"] = $myslide[3];
+			$slider[$i++] = $key;
+		}
+		fclose($myfile);
+		return $slider;
+	}
 
 if (isset($_REQUEST['deleteval']) && !empty($_REQUEST['deleteval'])) {
 
-    $myfile = PLUGIN_FOLDER_PATH . "libs/slider.txt";
-    $slider = getSlides();
+    $myfile = FFSB_SLIDER_FOLDER_PATH . "libs/slider.txt";
+    $slider = ffsb_get_slides();
     foreach ($slider as $singlearr) {
         if ($singlearr['slide_id'] == $_REQUEST['deleteval']) {
             $slidenum = $singlearr['slide_id'];
@@ -36,17 +36,17 @@ if (isset($_REQUEST['deleteval']) && !empty($_REQUEST['deleteval'])) {
 }
 
 /** Step 1. */
-function slider() {
+function ffsb_slider() {
     //add_options_page( 'slider Options', 'slider', 'manage_options', 'my-unique-identifier', 'my_plugin_options' );
 
-    add_menu_page('Slider', 'Slider', 'manage_options', 'my-top-level-handle', 'my_plugin_options');
+    add_menu_page('Slider', 'Slider', 'manage_options', 'my-top-level-handle', 'ffsb_slider_plugin_options');
 }
 
 /** Step 2 (from text above). */
-add_action('admin_menu', 'Slider');
+add_action('admin_menu', 'ffsb_slider');
 
 /** Step 3. */
-function my_plugin_options() {
+function ffsb_slider_plugin_options() {
     if (!current_user_can('manage_options')) {
         wp_die(__('You do not have sufficient permissions to access this page.'));
     }
