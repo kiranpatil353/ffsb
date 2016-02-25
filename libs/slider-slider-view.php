@@ -8,13 +8,19 @@ function slider_slider_shortcode() {
 add_shortcode('flat-slider', 'slider_slider_shortcode');
 
 function slider_slider_view() {
-    $myfile = fopen(plugin_dir_path(__FILE__) . "slider.txt", "r") or die("Unable to open file!");
+    $myfile = fopen(plugin_dir_path(__FILE__) . "ffsb-slider.txt", "r") or die("Unable to open file!");
     // Output one line until end-of-file
     $slider = array();
     $i = 0;
     while (!feof($myfile)) {
         $keys = array();
-        $myslide = explode("#", fgets($myfile));
+			 $line_of_file =  fgets($myfile);
+		 if (preg_match("/#/", $line_of_file , $matches)){
+				$myslide = explode("#", $line_of_file);
+			}
+			else{
+				continue;
+			}
         if (!empty($myslide[0])) {
             $key["slide_id"] = $myslide[0];
             $key["image_name"] = $myslide[1];
@@ -53,11 +59,11 @@ function slider_slider_view() {
     for ($i = 0; $i < $slide_number; $i++) {
         ?>
                 <div class="item <?php echo $i == 0 ? 'active' : ''; ?>">
-                    <img src="<?php echo $upload_dir['baseurl'] . '/slider/' . $slider[$i]['image_name']; ?>" />
+                    <img src="<?php echo esc_url($upload_dir['baseurl'] . '/ffsb-slider/' . $slider[$i]['image_name']); ?>" />
 					
-					 	<div class="carousel-caption">';
+					 	<div class="carousel-caption">
 								<?php if(isset($slider[$i]['slide_text'])){ ?>
-									<h2 class="slider-title-sm"><?php echo $slider[$i]['slide_text']; ?></h2>
+									<h2 class="slider-title-sm"><?php echo esc_html($slider[$i]['slide_text']); ?></h2>
 								<?php }?>
 						</div>
                 </div> <!--  items -->
@@ -69,7 +75,7 @@ function slider_slider_view() {
             <?php if (count($slides) > 1) { ?>
             <ol class="carousel-indicators">
             <?php foreach ($slides as $key => $slide) { ?>
-                    <li data-target="#slider-slider-id" data-slide-to="<?php echo $key; ?>" <?php echo $key == 0 ? 'class="active"' : ''; ?>></li>
+                    <li data-target="#slider-slider-id" data-slide-to="<?php echo esc_attr($key); ?>" <?php echo $key == 0 ? 'class="active"' : ''; ?>></li>
             <?php } ?>
             </ol>
             <?php } ?>

@@ -20,10 +20,10 @@ define('FFSB_SLIDER_FOLDER_PATH',plugin_dir_path(__FILE__));
  // Add scripts
  function ffsb_slider_enqueue_scripts() {
 //Plugin Main CSS File.
- 	 wp_enqueue_style('slider-bootstrap-css', plugins_url('assets/css/bootstrap.min.css', __FILE__ ) );
-     wp_enqueue_style( 'slider-slider-main', plugins_url('assets/css/slider-slider-main.css', __FILE__ ) );
-     wp_enqueue_script('slider-bootstrap-js', plugins_url('assets/js/bootstrap.min.js', __FILE__ ));
-	 wp_enqueue_script('slider-validation-js', plugins_url('assets/js/validation.js', __FILE__ ));
+ 	 wp_enqueue_style('ffsb-slider-bootstrap-css', plugins_url('assets/css/bootstrap.min.css', __FILE__ ) );
+     wp_enqueue_style( 'ffsb-slider-slider-main', plugins_url('assets/css/slider-slider-main.css', __FILE__ ) );
+     wp_enqueue_script('ffsb-slider-bootstrap-js', plugins_url('assets/js/bootstrap.min.js', __FILE__ ));
+	 wp_enqueue_script('ffsb-slider-validation-js', plugins_url('assets/js/validation.js', __FILE__ ));
   }
 
  //This hook ensures our scripts and styles are only loaded in the admin.
@@ -33,7 +33,7 @@ define('FFSB_SLIDER_FOLDER_PATH',plugin_dir_path(__FILE__));
  
     $upload = wp_upload_dir();
     $upload_dir = $upload['basedir'];
-    $upload_dir = $upload_dir . '/slider';
+    $upload_dir = $upload_dir . '/ffsb-slider';
     if (! is_dir($upload_dir)) {
        mkdir( $upload_dir, 0700 );
     }
@@ -44,7 +44,7 @@ register_activation_hook( __FILE__, 'ffsb_slider_activate' );
 function ffsb_slider_deactivate() {
  
     $upload = wp_upload_dir();
-    $upload_dir = $upload['basedir']."/slider";
+    $upload_dir = $upload['basedir']."/ffsb-slider";
     if (! is_dir($upload_dir)) {
         throw new InvalidArgumentException("$upload_dir must be a directory");
     }
