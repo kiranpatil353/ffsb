@@ -1,6 +1,5 @@
 <?php
-
-/**
+	/**
  * Plugin Name:		   Bootstrap Flat File slider
  * Plugin URI:		   http://clariontechnologies.co.in
  * Description:		   Twitter Bootstrap based  professional WordPress  carousel slider plugin.
@@ -9,7 +8,6 @@
  * Author URI: 		   http://clariontechnologies.co.in
  */
 // Constant
-
 define('FFSB_SLIDER_FOLDER_PATH', plugin_dir_path(__FILE__));
 
 // Add files for admin and frontend
@@ -37,6 +35,9 @@ function ffsb_slider_activate() {
     if (!is_dir($upload_dir)) {
         mkdir($upload_dir, 0700);
     }
+	else{
+	echo "erro";exit;
+	}
 }
 
 register_activation_hook(__FILE__, 'ffsb_slider_activate');
@@ -61,6 +62,5 @@ function ffsb_slider_deactivate() {
     }
     rmdir($upload_dir);
 }
-
 register_deactivation_hook(__FILE__, 'ffsb_slider_deactivate');
-
+?>

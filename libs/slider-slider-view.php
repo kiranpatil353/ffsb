@@ -1,5 +1,4 @@
 <?php
-
 function slider_slider_shortcode() {
 
     return slider_slider_view();
@@ -89,7 +88,6 @@ function slider_slider_view() {
 
 
     </div>
-
 
     <?php
     wp_reset_postdata();

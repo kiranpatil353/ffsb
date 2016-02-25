@@ -213,4 +213,3 @@ function ffsb_slider_add_options_function() {
     <?php
 }
 ?>
-		

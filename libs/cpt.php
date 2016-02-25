@@ -140,4 +140,3 @@ function ffsb_slider_plugin_options() {
     <?php
 }
 ?>
-
