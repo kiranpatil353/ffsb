@@ -14,18 +14,17 @@ function slider_slider_view() {
     $i = 0;
     while (!feof($myfile)) {
         $keys = array();
-			 $line_of_file =  fgets($myfile);
-		 if (preg_match("/#/", $line_of_file , $matches)){
-				$myslide = explode("#", $line_of_file);
-			}
-			else{
-				continue;
-			}
+        $line_of_file = fgets($myfile);
+        if (preg_match("/#/", $line_of_file, $matches)) {
+            $myslide = explode("#", $line_of_file);
+        } else {
+            continue;
+        }
         if (!empty($myslide[0])) {
             $key["slide_id"] = $myslide[0];
             $key["image_name"] = $myslide[1];
             $key["slide_position"] = $myslide[2];
-			$key["slide_text"] = $myslide[3];
+            $key["slide_text"] = $myslide[3];
             $slider[$i++] = $key;
         }
     }
@@ -44,28 +43,27 @@ function slider_slider_view() {
     <div id="slider-slider-id" class="carousel slide" data-ride="carousel">
 
         <div class="carousel-inner" role="listbox">
-    <?php
+            <?php
+            $upload_dir = wp_upload_dir();
 
-    $upload_dir = wp_upload_dir();
+            $slide_number = get_option('number_slides');
+            if ($slide_number == '') {
+                $slide_number = count($slider);
+            }
+            if ($slide_number > count($slider)) {
+                $slide_number = count($slider);
+            }
 
-    $slide_number = get_option('number_slides');
-    if ($slide_number == '') {
-        $slide_number = count($slider);
-    }
-    if ($slide_number > count($slider)) {
-        $slide_number = count($slider);
-    }
-
-    for ($i = 0; $i < $slide_number; $i++) {
-        ?>
+            for ($i = 0; $i < $slide_number; $i++) {
+                ?>
                 <div class="item <?php echo $i == 0 ? 'active' : ''; ?>">
                     <img src="<?php echo esc_url($upload_dir['baseurl'] . '/ffsb-slider/' . $slider[$i]['image_name']); ?>" />
-					
-					 	<div class="carousel-caption">
-								<?php if(isset($slider[$i]['slide_text'])){ ?>
-									<h2 class="slider-title-sm"><?php echo esc_html($slider[$i]['slide_text']); ?></h2>
-								<?php }?>
-						</div>
+
+                    <div class="carousel-caption">
+        <?php if (isset($slider[$i]['slide_text'])) { ?>
+                            <h2 class="slider-title-sm"><?php echo esc_html($slider[$i]['slide_text']); ?></h2>
+                        <?php } ?>
+                    </div>
                 </div> <!--  items -->
         <?php
     }
@@ -76,7 +74,7 @@ function slider_slider_view() {
             <ol class="carousel-indicators">
             <?php foreach ($slides as $key => $slide) { ?>
                     <li data-target="#slider-slider-id" data-slide-to="<?php echo esc_attr($key); ?>" <?php echo $key == 0 ? 'class="active"' : ''; ?>></li>
-            <?php } ?>
+                <?php } ?>
             </ol>
             <?php } ?>
 
