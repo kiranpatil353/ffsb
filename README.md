@@ -10,9 +10,9 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
- This Plugin is used as a flat file slider - users can Add/Edit/Delete slides and change their disply position 
+ This Plugin is used as a flat file slider - users can Add/Edit/Delete slides and change their display position 
  
- To fetch the slider at from end - use shortcode <?php echo do_shortcode('[flat-slider]');?>
+ To fetch the slider at front end - use shortcode <?php echo do_shortcode('[flat-slider]');?>
  
  In plugin you can add , Edit , delete the slides also sort as per your requirements .
    
