@@ -1,6 +1,7 @@
 === Plugin Name ===
-Contributors: clarion
+Contributors: kiranpatil353,Clarion
 Tags: Flat file slider
+Donate link: http://clariontechnologies.co.in/
 Requires at least: 3.0.1
 Tested up to: 4.4.2
 Stable tag: 4.4

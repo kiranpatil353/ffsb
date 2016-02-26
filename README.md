@@ -1,6 +1,6 @@
 === Plugin Name ===
-Contributors: clarion
-Donate link: http://clariontechnologies.co.in.com/
+Contributors: kiranpatil353,Clarion
+Donate link: http://clariontechnologies.co.in/
 Tags: Flat file slider
 Requires at least: 3.0.1
 Tested up to: 4.4.2
@@ -20,7 +20,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 == Installation ==
 
 
-1. Upload the plugin files to the `/wp-content/plugins/plugin-name` directory, or install the plugin through the WordPress plugins screen directly.
+1. Upload the plugin files to the '/wp-content/plugins/plugin-name' directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress
 3. *** Plugin requires "slider"  folder to be created inside uploads directory Please check if you have neccessary permissions for upload folder 
 or need to create ""uploads/slider"  directory  .
@@ -41,7 +41,7 @@ Yes you can but currently it is not given in admin section , it will be static o
 == Screenshots ==
 
 1. Screenshot-1 describes admin section of plugin 
-2. Screenshot-1 describes front end disply
+2. Screenshot-1 describes front end display
 
 == Changelog ==
 
