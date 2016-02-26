@@ -35,9 +35,7 @@ function ffsb_slider_activate() {
     if (!is_dir($upload_dir)) {
         mkdir($upload_dir, 0700);
     }
-	else{
-	echo "erro";exit;
-	}
+	
 }
 
 register_activation_hook(__FILE__, 'ffsb_slider_activate');
