@@ -1,64 +1,43 @@
-=== Plugin Name ===
-Contributors: kiranpatil353,Clarion
-Donate link: http://clariontechnologies.co.in/
-Tags: Flat file slider
+=== Bootstrap Flat File Slider ===
+Contributors: kiranpatil353
+Tags: slider, carousal , bootstrap slider 
 Requires at least: 3.0.1
-Tested up to: 4.4.2
-Stable tag: 4.4
+Tested up to: 4.4
+Stable tag: 1.0
 License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
+Twitter Bootstrap based professional WordPress carousel slider plugin.
 == Description ==
-
- This Plugin is used as a flat file slider - users can Add/Edit/Delete slides and change their display position 
- 
- To fetch the slider at front end - use shortcode <?php echo do_shortcode('[flat-slider]');?>
- 
- In plugin you can add , Edit , delete the slides also sort as per your requirements .
-   
-
-== Installation ==
-
-
-1. Upload the plugin files to the '/wp-content/plugins/plugin-name' directory, or install the plugin through the WordPress plugins screen directly.
-2. Activate the plugin through the 'Plugins' screen in WordPress
-3. *** Plugin requires "slider"  folder to be created inside uploads directory Please check if you have neccessary permissions for upload folder 
-or need to create ""uploads/slider"  directory  .
-
-== Frequently Asked Questions ==
-
-= Can  we Add caption to slider ? =
-
-Yes you can but currently it is not given in admin section , it will be static one .
-
-== Frequently Asked Questions ==
-
-= Can  we Add caption to slider ? =
-
-Yes you can but currently it is not given in admin section , it will be static one .
-
-
+Twitter Bootstrap based professional WordPress carousel slider plugin.
+This Plugin is used as a flat file slider - users can Add/Edit/Delete slides and change their display position 
+To fetch the slider at front end - use shortcode. <?php echo do_shortcode('[flat-slider]');?>
 == Screenshots ==
-
-1. Screenshot-1 describes admin section of plugin 
-2. Screenshot-1 describes front end display
+1. Admin screen and front end screen
+2. Admin screen and front end screen
+3. Admin screen and front end screen
 
 == Changelog ==
 
-= 1.0 =
-* current version 1.0 
+= 1.0.0 = 
+* Go to Admin 
 
+== Installation ==
 
+This section describes how to install the plugin and get it working.
+
+In WordPress:
+
+    Go to Plugins > Add New > search for :: Bootstrap Flat File slider ::
+    Press Install Now for the Show notice or message on admin area plugin
+    Press Activate Plugin
+
+To install manually instead:
+
+    Upload the Bootstrap Flat File slider  directory to the /wp-content/plugins/ directory
+    Activate the plugin through the Plugins menu in WordPress
+
+== Frequently Asked Questions ==
+1) Can I add text to slider ?
+Yes you can add , it is optional.
 == Upgrade Notice ==
-
-= 1.0 =
-currently no upgrades sections
-
-== Arbitrary section ==
-
-
-
-== A brief Markdown Example ==
-
-
-<?php echo do_shortcode('[flat-slider]');?>
+currently no upgrades
